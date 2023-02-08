@@ -28,5 +28,8 @@
     {
         this.scores.Add(newscores);
     }
-
+    public void AddBadScore(int newscores)
+    {
+        this.scores.Add(- newscores);
+    }
 }
