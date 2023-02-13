@@ -4,32 +4,21 @@
 
     private List<int> scores = new List<int>();
 
-    public User(string Name, string Surname, int Age)
+    public User(string login)
     {
-        this.Name = Name;
-        this.Surname = Surname;
-        this.Age = Age;
+        this.Login = login;
     }
-
-    public string Name { get; private set; }
-    public string Surname { get; private set; }
-    public int Age { get; private set; }
-    public int Result
-
-
+    public User(string login, string password, int age)
     {
-        get
-        {
-            return this.scores.Sum();
+        this.Login = login;
+        this.Password = password;
+    }
+    public string Login { get; private set; }
+    public string Password { get; private set; }
 
-        }
-    }
-    public void AddScore(int newscores)
-    {
-        this.scores.Add(newscores);
-    }
-    public void AddBadScore(int newscores)
-    {
-        this.scores.Add(- newscores);
-    }
+    public int Result;
+
+
+
+    
 }

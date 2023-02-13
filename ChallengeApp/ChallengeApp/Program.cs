@@ -1,5 +1,4 @@
 ﻿
-
 var employee = new Employee("Wiktor", "Kwilosz");
 employee.AddGrade(6);
 employee.AddGrade(7);
