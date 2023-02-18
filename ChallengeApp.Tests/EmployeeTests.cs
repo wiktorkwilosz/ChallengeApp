@@ -6,38 +6,53 @@ namespace ChallengeApp.Tests
     {
         [Test]
 
-        public void StatisticTestForMin()
+        public void WhenOnlyLettersAddingShowTheAverage()
+        {
+            var employee = new Employee("Wiktor","Kwilosz") ;
+          
+            employee.AddGrade('e');
+            employee.AddGrade('a');
+            employee.AddGrade('D');
+
+            var statistics = employee.GetStatistics();
+
+            Assert.AreEqual(statistics.AverageLetter,'C');
+
+        }
+        [Test]
+        public void WhenCalculationsWithCharsAndNumbersIsCorrectShowAverages()
         {
             var employee = new Employee("Wiktor", "Kwilosz");
-            employee.AddGrade(2);
-            employee.AddGrade(4);
-            employee.AddGrade(8);
+            employee.AddGrade('B');
+            employee.AddGrade(35);
+            employee.AddGrade(80);
+            employee.AddGrade('a');
+            employee.AddGrade(60);
+
+         
             var statistics = employee.GetStatistics();
 
-            Assert.AreEqual(statistics.Min, 2);
-
+            Assert.AreNotEqual(statistics.AverageLetter, 'C');
+            Assert.AreEqual(statistics.Average, 71.0f);
         }
         [Test]
-        public void StatisticTestForMax()
+        public void WhenCalculationWithCharsAndNumbersIsCorrectShowEquals()
         {
-            var employee = new Employee("Jan", "Kowalski");
-            employee.AddGrade(15);
-            employee.AddGrade(17);
-            employee.AddGrade(30);
+            var employee = new Employee("Wiktor", "Kwilosz");
+            employee.AddGrade('A');
+            employee.AddGrade(45);
+            employee.AddGrade(99);
+            employee.AddGrade('c');
+            employee.AddGrade(91);
+
+            
             var statistics = employee.GetStatistics();
 
-            Assert.AreEqual(statistics.Max, 30);
-        }
-        [Test]
-        public void StatisticTestForAverage()
-        {
-            var employee = new Employee("Grzegorz", "Nowak");
-            employee.AddGrade(10);
-            employee.AddGrade(10);
-            employee.AddGrade(2);
-            var statistics = employee.GetStatistics();
-
-            Assert.AreNotEqual(statistics.Average, 10);
+           
+            Assert.AreEqual(statistics.AverageLetter, 'B');
+            Assert.AreEqual(79, statistics.Average);
+            Assert.AreEqual(100, statistics.Max);
+            Assert.AreEqual(45, statistics.Min);
         }
     }
    
