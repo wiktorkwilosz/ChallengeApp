@@ -4,7 +4,7 @@ Console.WriteLine("Witamy w Programie do oceny pracowników");
 Console.WriteLine("==========================================");
 Console.WriteLine();
 
-var employee = new Employee("Wiktor", "Kwilosz");
+var employee = new Employee("Wiktor", "Kwilosz",);
 
 while(true)
 {
@@ -23,7 +23,6 @@ while(true)
         Console.WriteLine($"Exeption catched: {emp.Message}");
     }
 }
-
 var statistics=employee.GetStatistics();
 Console.WriteLine($"AverageLetter: {statistics.AverageLetter}");
 Console.WriteLine($"Average: {statistics.Average}");
