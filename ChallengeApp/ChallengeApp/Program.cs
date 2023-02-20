@@ -13,13 +13,23 @@ while(true)
     if (input == "q")
     {
         break;
-    }employee.AddGrade(input);
+    }
+    try
+    {
+        employee.AddGrade(input);
+    }
+    catch (Exception emp.)
+    {
+        Console.WriteLine($"Exeption catched: {emp.Message}");
+    }
 }
+
 var statistics=employee.GetStatistics();
 Console.WriteLine($"AverageLetter: {statistics.AverageLetter}");
 Console.WriteLine($"Average: {statistics.Average}");
 Console.WriteLine($"Min: {statistics.Min}");
 Console.WriteLine($"Max: {statistics.Max}");
+
 
 
 

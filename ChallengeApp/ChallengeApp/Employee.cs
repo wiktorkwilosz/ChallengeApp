@@ -46,7 +46,7 @@ namespace ChallengeApp
             }
             else
             {
-                Console.WriteLine("Invalid number");
+                throw new Exception("Invalid number");
             }
    
         }
@@ -74,9 +74,9 @@ namespace ChallengeApp
                     break;
                 default:
                     {
-                        Console.WriteLine("Wrong Letter");
+                        throw new Exception("Wrong letter");
                     }
-                    break;
+                    
             }                          
         }
         public Statistics GetStatistics()
@@ -113,7 +113,7 @@ namespace ChallengeApp
                     break;
                 default:
                     statistics.AverageLetter = 'E';
-                    Console.WriteLine("Ponizej normy!");
+                    throw new Exception("Ponizej normy!");
                     break;
             }
 
