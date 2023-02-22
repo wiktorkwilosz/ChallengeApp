@@ -4,8 +4,8 @@ Console.WriteLine("Witamy w Programie do oceny pracowników");
 Console.WriteLine("==========================================");
 Console.WriteLine();
 
-var employee = new Employee("Wiktor", "Kwilosz",);
-
+var employee = new Employee("Wiktor", "Kwilosz", 27 );
+var supervisior = new Supervisor("Jan", "Kowalski", 45); 
 while(true)
 {
     Console.WriteLine("Podaj kolejną ocenę pracownika:");
