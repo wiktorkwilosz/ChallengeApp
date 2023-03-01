@@ -1,16 +1,23 @@
 ﻿using ChallengeApp;
+using System.ComponentModel.DataAnnotations;
 
 Console.WriteLine("Witamy w Programie do oceny pracowników");
 Console.WriteLine("==========================================");
 Console.WriteLine();
 
-var employee = new Employee("Wiktor", "Kwilosz", 27 );
-var supervisior = new Supervisor("Jan", "Kowalski", 45); 
-while(true)
+EmployeeInFile employee = new EmployeeInFile("Wiktor", "Kwilosz");
+
+
+Console.WriteLine("Wprowadż litere od 1 do 100 lub wpisz Q żeby wyjść");
+
+
+Console.WriteLine($"nowa ocena:");
+
+while (true)
 {
-    Console.WriteLine("Podaj kolejną ocenę pracownika:");
-    var input= Console.ReadLine();
-    if (input == "q")
+    Console.WriteLine("podaj kolejną ocenę pracownika:");
+    var input = Console.ReadLine();
+    if (input == "q" || input=="Q")
     {
         break;
     }
@@ -18,16 +25,18 @@ while(true)
     {
         employee.AddGrade(input);
     }
-    catch (Exception emp.)
+    catch (Exception emp)
     {
-        Console.WriteLine($"Exeption catched: {emp.Message}");
+        Console.WriteLine($"exeption catched: {emp.Message}");
     }
-}
-var statistics=employee.GetStatistics();
-Console.WriteLine($"AverageLetter: {statistics.AverageLetter}");
-Console.WriteLine($"Average: {statistics.Average}");
-Console.WriteLine($"Min: {statistics.Min}");
-Console.WriteLine($"Max: {statistics.Max}");
+    }
+    var statistics = employee.GetStatistics();
+    Console.WriteLine($"averageletter: {statistics.AverageLetter}");
+    Console.WriteLine($"average: {statistics.Average}");
+    Console.WriteLine($"min: {statistics.Min}");
+    Console.WriteLine($"max: {statistics.Max}");
+
+
 
 
 

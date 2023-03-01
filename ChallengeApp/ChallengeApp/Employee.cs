@@ -50,35 +50,7 @@ namespace ChallengeApp
             }
    
         }
-        public void AddGrade (char grade)
-        {
-            switch (grade)
-            {
-                case 'A' or 'a':
-                this.grades.Add(100);
-                    break;
-                case 'B' or 'b':
-                    this.grades.Add(80);
-                    break;
-                case 'C' or 'c':
-                    this.grades.Add(60);
-                    break;
-                case 'D' or 'd':
-                    this.grades.Add(40);
-                    break;
-                case 'E' or 'e':
-                    this.grades.Add(20);
-                    break;
-                case 'F' or 'f':
-                    this.grades.Add(0);
-                    break;
-                default:
-                    {
-                        throw new Exception("Wrong letter");
-                    }
-                    
-            }                          
-        }
+        
         public Statistics GetStatistics()
         {
             var statistics = new Statistics();
