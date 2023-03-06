@@ -122,10 +122,20 @@ namespace ChallengeApp
                             throw new Exception("Ponizej normy!");
                             break;
                     }
-                }return statistics; 
+                }return statistics;
             }
+        }
+        public override Statistics RememberTheCollectedPoints()
+        {
+            var statistics = new Statistics();
+
+            foreach (var grade in this.grades)
+            {
+                statistics.PointsCollected += grade + ",";
+            }
+            return statistics;
         }
     }
 }
-
+    
 

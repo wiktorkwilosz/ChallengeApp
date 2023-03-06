@@ -1,9 +1,6 @@
 ﻿
-
-
-using System.Diagnostics;
 using System.Diagnostics.Metrics;
-using System.Reflection.PortableExecutable;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ChallengeApp
 {
@@ -25,7 +22,7 @@ namespace ChallengeApp
             {
                 if (grade >= 0 && grade <= 100)
                 {
-                    writer.Write(grade);
+                    writer.WriteLine(grade);
                 }
 
 
@@ -35,6 +32,31 @@ namespace ChallengeApp
                 }
             }
 
+        }
+        public override void AddGrade(long grade)
+        {
+            float valueAsFloat = (long)grade;
+            this.AddGrade(valueAsFloat);
+        }
+
+        public override void AddGrade(int grade)
+        {
+            float gradeAsFloat = (int)grade;
+            this.AddGrade(gradeAsFloat);
+        }
+
+        public override void AddGrade(string grade)
+        {
+            {
+                if (float.TryParse(grade, out float result))
+                {
+                    this.AddGrade(result);
+                }
+                else
+                {
+                    throw new Exception("Invalid number");
+                }
+            }
         }
         public override void AddGrade(char grade)
         {
@@ -65,86 +87,99 @@ namespace ChallengeApp
 
             }
         }
-
-        public override void AddGrade(long grade)
-        {
-            float valueAsFloat = (long)grade;
-            this.AddGrade(valueAsFloat);
-        }
-
-        public override void AddGrade(int grade)
-        {
-            float gradeAsFloat = (int)grade;
-            this.AddGrade(gradeAsFloat);
-        }
-
-        public override void AddGrade(string grade)
-        {
-            {
-                if (float.TryParse(grade, out float result))
-                {
-                    this.AddGrade(result);
-                }
-                else
-                {
-                    throw new Exception("Invalid number");
-                }
-
-            }
-        }
-
         public override Statistics GetStatistics()
         {
-            
-            var statistics = new Statistics();
-            statistics.Average = 0;
-            statistics.Max = float.MinValue;
-            statistics.Min = float.MaxValue;
+            var gradesFromFile = this.ReadGradesFromFile();
+            var result = this.CountStatistics(gradesFromFile);
 
-            if (File.Exists($"{fileName}"))
+            return result;
+        }
+
+        private Statistics CountReadGradesFromFile(List<float> grades)
+        {
+            var statistics = new Statistics();
+            foreach (var grade in grades)
+            {
+                statistics.PointsCollected += grade;
+            }
+            return statistics;
+        }
+
+
+        public override Statistics RememberTheCollectedPoints()
+        {
+
+            var gradesFromFile = this.ReadGradesFromFile();
+            var result = this.CountReadGradesFromFile(gradesFromFile);
+            return result;
+        }
+
+        private List<float> ReadGradesFromFile()
+        {
+            var grades = new List<float>();
+            if (File.Exists(fileName))
             {
                 using (var reader = File.OpenText(fileName))
                 {
                     var line = reader.ReadLine();
                     while (line != null)
                     {
-                        var number = float.Parse(line);
+                        var namber = float.Parse(line);
+                        grades.Add(namber);
+                        line = reader.ReadLine();
 
-                        statistics.Max = Math.Max(statistics.Max, number);
-                        statistics.Min = Math.Min(statistics.Min, number);
-                        statistics.Average += number;
-
-                    }
-                    statistics.Average = (float)Math.Round(statistics.Average);
-                    switch (statistics.Average)
-                    {
-                        case var average when average >= 80:
-                            statistics.AverageLetter = 'A';
-                            break;
-                        case var average when average >= 60:
-                            statistics.AverageLetter = 'B';
-                            break;
-                        case var average when average >= 40:
-                            statistics.AverageLetter = 'C';
-                            break;
-                        case var average when average >= 20:
-                            statistics.AverageLetter = 'D';
-                            break;
-                        default:
-                            statistics.AverageLetter = 'E';
-                            throw new Exception("Ponizej normy!");
-                            break;
                     }
                 }
-
             }
-            return statistics;
-
-
-
+            return grades;
         }
 
+        private Statistics CountStatistics(List<float> grades)
+        {
+            var statistics = new Statistics();
+            statistics.Average = 0;
+            statistics.Max = float.MinValue;
+            statistics.Min = float.MaxValue;
+
+            foreach (var grade in grades)
+            {
+
+                statistics.Max = Math.Max(statistics.Max, grade);
+                statistics.Min = Math.Min(statistics.Min, grade);
+                statistics.Average += grade;
+            }
+            if (grades.Count == 0)
+            {
+                statistics.Max = 0;
+                statistics.Min = 0;
+                statistics.Average = 0;
+            }
+            else
+            {
+                statistics.Average /= grades.Count;
+            }
+            switch (statistics.Average)
+            {
+                case var average when average >= 80:
+                    statistics.AverageLetter = 'A';
+                    break;
+                case var average when average >= 60:
+                    statistics.AverageLetter = 'B';
+                    break;
+                case var average when average >= 40:
+                    statistics.AverageLetter = 'C';
+                    break;
+                case var average when average >= 20:
+                    statistics.AverageLetter = 'D';
+                    break;
+                default:
+                    statistics.AverageLetter = 'E';
+                    throw new Exception("Ponizej normy!");
+                    break;
+            }
+            return statistics;
+        }
     }
 }
 
-
+          

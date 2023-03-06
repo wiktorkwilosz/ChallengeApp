@@ -35,5 +35,7 @@ namespace ChallengeApp
 
         public abstract Statistics GetStatistics();
 
+        public abstract Statistics RememberTheCollectedPoints();
+
     }
 }

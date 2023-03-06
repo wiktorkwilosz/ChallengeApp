@@ -1,17 +1,15 @@
-﻿
-
-namespace ChallengeApp
+﻿namespace ChallengeApp
 {
- 
-    public class Employee : Person 
+
+    public class Employee : Person
     {
         private List<float> grades = new List<float>();
         public Employee(string name, string surname, char age)
             : base(name, surname, age)
         {
-         
+
         }
-       
+
         public void AddGrade(float grade)
         {
             int valueInInt = (int)grade;
@@ -22,7 +20,7 @@ namespace ChallengeApp
                 grades.Add(grade);
             }
 
- }
+        }
         public void AddGrade(long grade)
         {
             float valueAsFloat = (long)grade;
@@ -48,9 +46,9 @@ namespace ChallengeApp
             {
                 throw new Exception("Invalid number");
             }
-   
+
         }
-        
+
         public Statistics GetStatistics()
         {
             var statistics = new Statistics();
@@ -85,7 +83,6 @@ namespace ChallengeApp
                     break;
                 default:
                     statistics.AverageLetter = 'E';
-                    throw new Exception("Ponizej normy!");
                     break;
             }
 
@@ -93,6 +90,3 @@ namespace ChallengeApp
         }
     }
 }
-          
-
-  

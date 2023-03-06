@@ -11,13 +11,11 @@ EmployeeInFile employee = new EmployeeInFile("Wiktor", "Kwilosz");
 Console.WriteLine("Wprowadż litere od 1 do 100 lub wpisz Q żeby wyjść");
 
 
-Console.WriteLine($"nowa ocena:");
-
 while (true)
 {
     Console.WriteLine("podaj kolejną ocenę pracownika:");
     var input = Console.ReadLine();
-    if (input == "q" || input=="Q")
+    if (input == "q")
     {
         break;
     }
@@ -25,14 +23,15 @@ while (true)
     {
         employee.AddGrade(input);
     }
-    catch (Exception emp)
+    catch (Exception ex)
     {
-        Console.WriteLine($"exeption catched: {emp.Message}");
+        Console.WriteLine($"exeption catched: {ex.Message}");
     }
     }
     var statistics = employee.GetStatistics();
+
     Console.WriteLine($"averageletter: {statistics.AverageLetter}");
-    Console.WriteLine($"average: {statistics.Average}");
+    Console.WriteLine($"average: {statistics.Average:N2}");
     Console.WriteLine($"min: {statistics.Min}");
     Console.WriteLine($"max: {statistics.Max}");
 
