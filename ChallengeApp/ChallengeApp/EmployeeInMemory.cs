@@ -3,6 +3,9 @@ namespace ChallengeApp
 {
     internal class EmployeeInMemory : EmployeeBase
     {
+        public delegate void GradeAddedDelegate(object sender, EventArgs args);
+        
+
         private IEnumerable<object> grades;
         private byte grade;
 
@@ -10,16 +13,20 @@ namespace ChallengeApp
             : base(name, surname)
         {
         }
-
+        public  event GradeAddedDelegate GradeAdded;
         public override void AddGrade(float grade)
         {
             if (grade >= 0 && grade <= 100)
             {
                 this.AddGrade(grade);
+                if(GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }
             }
             else
             {
-                throw new Exception("Invalid number");
+                throw new Exception("Błędna wartość. Wartość musi sie mieścić w przedziale 0-100");
             }
         }
 

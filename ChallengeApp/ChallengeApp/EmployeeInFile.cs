@@ -6,6 +6,8 @@ namespace ChallengeApp
 {
     public class EmployeeInFile : EmployeeBase
     {
+        public delegate void GradeAddedDelegate(object sender, EventArgs args);
+        public event GradeAddedDelegate GradeAdded;
 
         private const string fileName = "grades.txt";
 
@@ -23,12 +25,16 @@ namespace ChallengeApp
                 if (grade >= 0 && grade <= 100)
                 {
                     writer.WriteLine(grade);
+                    if(GradeAdded!= null)
+                    {
+                        GradeAdded(this, new EventArgs());
+                    }
                 }
 
 
                 else
                 {
-                    throw new Exception("Invalid number");
+                    throw new Exception("Błędna wartość. Wartość musi sie mieścić w przedziale 0-100");
                 }
             }
 

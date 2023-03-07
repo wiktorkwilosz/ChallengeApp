@@ -6,8 +6,16 @@ Console.WriteLine("==========================================");
 Console.WriteLine();
 
 EmployeeInFile employee = new EmployeeInFile("Wiktor", "Kwilosz");
+employee.GradeAdded += EmployeeGradeAdded;
+void EmployeeGradeAdded(object sender, EventArgs args)
+{
+    Console.WriteLine($"Dodano nową ocenę");
 
+}
+Console.WriteLine(employee.Name);
+Console.WriteLine(employee.Surname);
 
+Console.WriteLine();    
 Console.WriteLine("Wprowadż litere od 1 do 100 lub wpisz Q żeby wyjść");
 
 
