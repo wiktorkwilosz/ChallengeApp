@@ -23,7 +23,7 @@ while (true)
 {
     Console.WriteLine("podaj kolejną ocenę pracownika:");
     var input = Console.ReadLine();
-    if (input == "q")
+    if (input == "q" || input=="Q")
     {
         break;
     }
@@ -33,16 +33,20 @@ while (true)
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"exeption catched: {ex.Message}");
+        Console.WriteLine($"Wystąpił błąd wyjątku: {ex.Message}");
     }
     }
     var statistics = employee.GetStatistics();
+if (statistics.Count != 0)
+{
 
-    Console.WriteLine($"averageletter: {statistics.AverageLetter}");
-    Console.WriteLine($"average: {statistics.Average:N2}");
-    Console.WriteLine($"min: {statistics.Min}");
-    Console.WriteLine($"max: {statistics.Max}");
-
+    Console.WriteLine($"Podsumowanie dla : {employee.Name}{employee.Surname}");
+    Console.WriteLine($"Liczba ocen pracownika: {statistics.Count}. Suma ocen {statistics.Sum}");
+    Console.WriteLine($"Średnia wyrażona literą: {statistics.AverageLetter}");
+    Console.WriteLine($"Średnia z uzyskanych ocen: {statistics.Average:N2}");
+    Console.WriteLine($"Najnizsza ocena: {statistics.Min}");
+    Console.WriteLine($"Najwyższa ocena: {statistics.Max}");
+}
 
 
 
